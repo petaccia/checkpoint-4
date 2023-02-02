@@ -29,15 +29,13 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`users` (
   `email` VARCHAR(255) NOT NULL,
   `login` VARCHAR(100) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `profilPicture` VARCHAR(255) NULL,
+  `profilPicture` VARCHAR(255) DEFAULT NULL,
   `firstname` VARCHAR(50) NOT NULL,
   `lastname` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`)
   )ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Data for table `reseau_social`.`users`
--- -----------------------------------------------------
+
 INSERT INTO 
 `users`(`email`, `login`, `password`, `profilPicture`, `firstname`, `lastname`)
 VALUES
@@ -50,9 +48,7 @@ VALUES
 ('jerome@gmail.com', 'jerome78', '123456', NULL, 'Jerome', 'Rey'),
 ('laure@gmail.com', 'laure78', '123456', NULL, 'ola', 'Bigot');
 
--- -----------------------------------------------------
--- Table `reseau_social`.`albums`
--- -----------------------------------------------------
+
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`albums` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -64,17 +60,12 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`albums` (
     REFERENCES `reseau_social`.`users` (`id`)
     )ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Data for table `reseau_social`.`albums`
--- -----------------------------------------------------
-INSERT INTO 
-`albums` (`name`, 'user_id')
+
+INSERT INTO `albums` (`name`, `user_id`)
 VALUES ('familial', 1), ('sportif', 2), ('vacances', 3);
 
 
--- -----------------------------------------------------
--- Table `reseau_social`.`friends`
--- -----------------------------------------------------
+
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`friends` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -90,9 +81,7 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`friends` (
     )ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `reseau_social`.`groups`
--- -----------------------------------------------------
+
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`groups` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -104,19 +93,14 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`groups` (
     REFERENCES `reseau_social`.`users` (`id`)
     )ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Data `reseau_social`.`groups`
--- -----------------------------------------------------
-INSERT INTO `groups`('name', 'user_id')
-('la famille en or', 1), ('les sportifs', 2), ('les vacanciers', 3);
 
--- -----------------------------------------------------
--- Table `reseau_social`.`pictures`
--- -----------------------------------------------------
+INSERT INTO `groups` (`name`, `user_id`)
+VALUES ('la famille en or', 2), ('les sportifs', 2), ('les vacanciers', 3);
+
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`pictures` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `path` VARCHAR(255) NULL,
+  `path` VARCHAR(255) DEFAULT NULL,
   `name` VARCHAR(50) NOT NULL,
   `album_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -124,18 +108,15 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`pictures` (
     FOREIGN KEY (`album_id`)
     REFERENCES `reseau_social`.`albums` (`id`)
     )ENGINE = InnoDB;
--- -----------------------------------------------------
--- Data `reseau_social`.`pictures`
--- -----------------------------------------------------
+
 INSERT INTO `pictures`(`path`, `name`, `album_id`)
-( NULL, 'Annecy', 3),
-( NULL, 'Tour de france', 2),
-( NULL, 'pique-nique', 1); 
+VALUES
+(NULL, 'Annecy', 3),
+(NULL, 'Tour de france', 2),
+(NULL, 'pique-nique', 1); 
 
 
--- -----------------------------------------------------
--- Table `reseau_social`.`posts`
--- -----------------------------------------------------
+
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`posts` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -145,15 +126,12 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`posts` (
   PRIMARY KEY (`id`)
   )ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Data `reseau_social`.`posts`
--- -----------------------------------------------------
+
 INSERT INTO `posts` (`title`, `body`, `date`)
+VALUES
 ( NULL, NULL, now() );
 
--- -----------------------------------------------------
--- Table `reseau_social`.`share`
--- -----------------------------------------------------
+
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`share` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -177,15 +155,12 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`share` (
     REFERENCES `reseau_social`.`users` (`id`)
     )ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Data `reseau_social`.`share`
--- -----------------------------------------------------
+
 INSERT INTO `share` (`date`, `user_id`, `album_id`, `post_id`, `group_id`)
+VALUES
 (NULL, NULL, NULL, NULL, 1);
 
--- -----------------------------------------------------
--- Table `reseau_social`.`usersgroup`
--- -----------------------------------------------------
+
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`usersGroup` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -200,9 +175,8 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`usersGroup` (
     REFERENCES `reseau_social`.`users` (`id`)
     )ENGINE = InnoDB;
 
-    -- -----------------------------------------------------
--- Data `reseau_social`.`usersGroup`
--- -----------------------------------------------------
+
 
 INSERT INTO `usersGroup` (`user_id`, `group_id`)
-(1 , 1 );
+VALUES
+(1 , 1);
