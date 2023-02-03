@@ -19,5 +19,7 @@ router.put("/pictures/:id", picturesControllers.edit);
 router.get("/albums", albumControllers.browse);
 router.get("/albums/:id", albumControllers.read);
 router.post("/albums", albumControllers.add);
-router.put("/albums/:id", albumControllers.edit);
+
+router.post("/login", usersControllers.validateUser);
+router.post("/signUp", usersControllers.createUser);
 module.exports = router;

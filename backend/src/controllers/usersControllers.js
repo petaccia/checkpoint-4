@@ -1,4 +1,23 @@
 const models = require("../models");
+const validateConnection = require("../services/users");
+
+const validateUser = (req, res) => {
+  const { user } = req.body;
+  const error = validateConnection(user);
+  if (error) {
+    res.status(422).send(error);
+  } else {
+    models.users.login(user).then();
+  }
+  res.status(201).cookie("access_token", "connection validate", {
+    httpOnly: true,
+  });
+  res.status(200).json({ email: user.email, name: user.name });
+};
+
+const createUser = (req, res) => {
+  res.sendStatus(200);
+};
 
 const browse = (req, res) => {
   models.users
@@ -66,4 +85,4 @@ const edit = (req, res) => {
     });
 };
 
-module.exports = { browse, read, add, edit };
+module.exports = { browse, read, add, edit, validateUser, createUser };
