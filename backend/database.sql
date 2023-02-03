@@ -80,7 +80,9 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`friends` (
     REFERENCES `reseau_social`.`users` (`id`)
     )ENGINE = InnoDB;
 
-
+INSERT INTO `friends`(`user_id`, `user2_id`)
+VALUES
+(1,2);
 
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`groups` (
@@ -93,9 +95,12 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`groups` (
     REFERENCES `reseau_social`.`users` (`id`)
     )ENGINE = InnoDB;
 
-
 INSERT INTO `groups` (`name`, `user_id`)
-VALUES ('la famille en or', 2), ('les sportifs', 2), ('les vacanciers', 3);
+VALUES 
+('la famille en or', 1), 
+('les sportifs', 2), 
+('les vacanciers', 3);
+
 
 
 CREATE TABLE IF NOT EXISTS `reseau_social`.`pictures` (
