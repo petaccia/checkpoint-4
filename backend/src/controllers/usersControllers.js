@@ -1,22 +1,16 @@
+const Joi = require("joi");
 const models = require("../models");
-const validateConnection = require("../services/users");
 
 const validateUser = (req, res) => {
-  const { user } = req.body;
-  const error = validateConnection(user);
-  if (error) {
-    res.status(422).send(error);
+  const { error } = Joi.object({
+    email: Joi.string().email().max(255).presence("required"),
+    password: Joi.string().min(8).max(255).presence("required"),
+  }).validate(req.body, { abortEarly: false });
+  if (!error) {
+    res.send("hello World");
   } else {
-    models.users.login(user).then();
+    res.status(400).json({ msg: "mauvais message" });
   }
-  res.status(201).cookie("access_token", "connection validate", {
-    httpOnly: true,
-  });
-  res.status(200).json({ email: user.email, name: user.name });
-};
-
-const createUser = (req, res) => {
-  res.sendStatus(200);
 };
 
 const browse = (req, res) => {
@@ -85,4 +79,4 @@ const edit = (req, res) => {
     });
 };
 
-module.exports = { browse, read, add, edit, validateUser, createUser };
+module.exports = { browse, read, add, edit, validateUser };

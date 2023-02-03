@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
   `login` VARCHAR(100) NOT NULL,
-  `hashedPassword` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `profilPicture` VARCHAR(255) DEFAULT NULL,
   `firstname` VARCHAR(50) NOT NULL,
   `lastname` VARCHAR(50) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `reseau_social`.`users` (
 
 
 INSERT INTO 
-`users`(`email`, `login`, `hashedPassword`, `profilPicture`, `firstname`, `lastname`)
+`users`(`email`, `login`, `password`, `profilPicture`, `firstname`, `lastname`)
 VALUES
 ('alain@gmail.com', 'alain78', '123456', NULL, 'Alain', 'Chambort'),
 ('guillaume@gmail.com', 'guillaume78', '123456', NULL, 'Guillaume', 'Augier'),

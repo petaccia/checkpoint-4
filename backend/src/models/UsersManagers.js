@@ -9,6 +9,13 @@ class UsersManager extends AbstractManager {
     return this.connection.query(`SELECT * FROM ${this.table}`);
   }
 
+  findOne(user) {
+    return this.connection.query(
+      `SELECT * FROM  ${this.table} WHERE email = ?`,
+      [user.email]
+    );
+  }
+
   find(id) {
     return this.connection.query(`SELECT * FROM  ${this.table} WHERE id = ?`, [
       id,
@@ -17,11 +24,11 @@ class UsersManager extends AbstractManager {
 
   insert(users) {
     return this.connection.query(
-      `insert into ${this.table} (email, login, password, profilPicture, firstname, lastname) values (?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (email, login, hashedPassword, profilPicture, firstname, lastname) values (?, ?, ?, ?, ?, ?)`,
       [
         users.email,
         users.login,
-        users.password,
+        users.hashedPassword,
         users.profilPicture,
         users.firstname,
         users.lastname,
