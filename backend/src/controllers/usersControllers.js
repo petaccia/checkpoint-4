@@ -1,4 +1,17 @@
+const Joi = require("joi");
 const models = require("../models");
+
+const validateUser = (req, res) => {
+  const { error } = Joi.object({
+    email: Joi.string().email().max(255).presence("required"),
+    password: Joi.string().min(8).max(255).presence("required"),
+  }).validate(req.body, { abortEarly: false });
+  if (!error) {
+    res.send("hello World");
+  } else {
+    res.status(400).json({ msg: "mauvais message" });
+  }
+};
 
 const browse = (req, res) => {
   models.users
@@ -66,4 +79,4 @@ const edit = (req, res) => {
     });
 };
 
-module.exports = { browse, read, add, edit };
+module.exports = { browse, read, add, edit, validateUser };
