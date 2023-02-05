@@ -7,7 +7,7 @@ const validateUser = (req, res) => {
     password: Joi.string().min(8).max(255).presence("required"),
   }).validate(req.body, { abortEarly: false });
   if (!error) {
-    res.send("hello World");
+    res.sendStatus(200);
   } else {
     res.status(400).json({ msg: "mauvais message" });
   }
