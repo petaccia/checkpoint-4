@@ -21,5 +21,5 @@ router.get("/albums/:id", albumControllers.read);
 router.post("/albums", albumControllers.add);
 
 router.post("/login", usersControllers.validateUser);
-router.post("/signUp", usersControllers.createUser);
+// router.post("/signUp", usersControllers.createUser);
 module.exports = router;
