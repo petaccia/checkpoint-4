@@ -5,6 +5,8 @@ const router = express.Router();
 const usersControllers = require("./controllers/usersControllers");
 const picturesControllers = require("./controllers/picturesControllers");
 const albumControllers = require("./controllers/albumControllers");
+const connexionControllers = require("./controllers/connexionControllers");
+// const checkAuth = require("../middleware/auth");
 
 router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
@@ -20,6 +22,7 @@ router.get("/albums", albumControllers.browse);
 router.get("/albums/:id", albumControllers.read);
 router.post("/albums", albumControllers.add);
 
-router.post("/login", usersControllers.validateUser);
-// router.post("/signUp", usersControllers.createUser);
+// router.use(checkAuth)
+router.post("/login", connexionControllers.validateUser);
+router.post("/signUp", connexionControllers.createUser);
 module.exports = router;
