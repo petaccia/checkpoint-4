@@ -1,3 +1,4 @@
+// import IndexLog from "@components/Log/IndexLog.Jsx";
 import Home from "./pages/Home";
 import "./App.css";
 import Profil from "./pages/Profil";
